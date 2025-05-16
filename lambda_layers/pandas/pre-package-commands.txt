@@ -1,0 +1,8 @@
+"echo 'Hello from pre-package-commands.txt'"
+"rm -rf /asset-output/python/botocore", // Lambda runtime already has boto itself
+"rm -rf /asset-output/python/boto3", // Lambda runtime already has boto itself
+"rm -rf /asset-output/python/bin", // No need to execute CLI binaries
+"find /asset-output/python -name '*.so' -type f -exec strip \"{}\" \\;", // Not sure why this is needed, copied it from AWS Data Wrangler build
+"find /asset-output/python -d -regex '.*/tests' -exec rm -r {} +", // Get rid of tests
+"find /asset-output/python -d -regex '.*/__pycache__' -exec rm -r {} +", // Get rid of pycache
+"find /asset-output/python -type f -regex '^.*\\.py[co]$' -delete", // Get rid of pycache
